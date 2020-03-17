@@ -3,8 +3,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var listRouter = require('./routes/listRouter');
+var detailRouter = require('./routes/detailRouter');
 
 var app = express();
 
@@ -14,8 +14,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', listRouter);
+app.use('/app', detailRouter);
 
 var gplay = require('google-play-scraper');
  
