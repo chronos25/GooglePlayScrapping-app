@@ -1,12 +1,14 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-var listRouter = require('./routes/listRouter');
-var detailRouter = require('./routes/detailRouter');
-
-var app = express();
+const express = require('express'),
+ path = require('path'),
+ cookieParser = require('cookie-parser'),
+ logger = require('morgan'),
+ gplay = require('google-play-scraper'),
+ assert = require('assert'),
+ mongoose = require('mongoose'),
+ listRouter = require('./routes/listRouter'),
+ detailRouter = require('./routes/detailRouter'),
+ url = 'mongodb://localhost:27017/googleplayscrapping',
+ app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -17,13 +19,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', listRouter);
 app.use('/app', detailRouter);
 
-var gplay = require('google-play-scraper');
- 
-gplay.list({
-    category: gplay.category.APPLICATION,
-    collection: gplay.collection.TOP_FREE,
-    num: 2
-  })
-  .then(console.log, console.log);
+const options = {
+  useNewUrlParser : true
+}
+
+const connect = mongoose.connect(url,options,(err,client)=>{  
+  assert.equal(null,err);
+  console.log("Connected Sucessfully to DB");
+  
+});
+
+
 
   module.exports = app;
