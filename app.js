@@ -16,11 +16,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', listRouter);
-app.use('/app', detailRouter);
-
 const options = {
-  useNewUrlParser : true
+  useNewUrlParser : true,
+  useUnifiedTopology: true
 }
 
 const connect = mongoose.connect(url,options,(err,client)=>{  
@@ -29,6 +27,9 @@ const connect = mongoose.connect(url,options,(err,client)=>{
   
 });
 
+
+app.use('/applists', listRouter);
+app.use('/app', detailRouter);
 
 
   module.exports = app;
