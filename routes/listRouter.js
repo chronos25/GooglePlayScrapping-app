@@ -1,8 +1,7 @@
 const express = require('express'),
  scraper = express.Router(),
  assert = require('assert'),
- gplay = require('google-play-scraper'),
- list = require('../controller/getLists'),
+ gplay = require('google-play-scraper'), 
  appList = require('../models/list');
 scraper.route('/')
 .get((req, res, next) =>{ 

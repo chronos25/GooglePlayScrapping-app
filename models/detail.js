@@ -24,6 +24,10 @@ const detailSchema = new schema({
         type: String,
         required:true
     },
+    appId:{
+        type:String,
+        required:true
+    },
     description:{
         type: String,
         required:true
